@@ -43,10 +43,12 @@ try {
   throw new Error(error.message)
 }
 })
+
+
 </script>
 
 <template>
-  <h1 class="t">{{ age}}</h1>
+  <h1 class="bg-red-400 p-5 inline-block mx-4 my-7 animate-ping delay-150 ease-in-out">{{ age}}</h1>
 
   <form @submit.prevent="addForm">
     <label for="newTask">New Task</label>
@@ -57,7 +59,7 @@ try {
 
   <h3>Tasks Below: </h3>
   <ul>
-<li v-for="(task,index) in tasks" :key="task"> 
+<li  v-for="(task,index) in tasks" :key="task"> 
   
   <span>
   {{ task }}
