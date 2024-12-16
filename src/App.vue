@@ -1,47 +1,48 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+export default {
+  data(){
+    return{
+      name: 'Ayanle Dirie',
+      age: 32,
+      status: 'no-active',
+      Tasks: [
+        {id: 1, name: 'Brad', employee: true},
+        {id: 2, name: 'Bradley', employee: false},
+        {id: 3, name: 'Bradon', employee: true},
+
+
+
+      ]
+    }
+  },
+
+  methods:{
+    clickMe(){
+      this.name = "ayoub"
+      console.log(this.name)
+    }
+
+}
+}
+
+
 </script>
 
+
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+<h1 class="t">{{ name }}</h1>
+<p v-if="status === 'active'"> User is Active</p>
+<p v-else-if="status === 'pending'"> The File is Pending and User information is being Fetched</p>
+<p v-else="status === 'no-active'">There is no user available</p>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+<h3>Tasks:</h3>
+<ul>
+  <li v-for="task in Tasks" :key="Tasks.id">{{ task}} </li>
+</ul>
 
-  <main>
-    <TheWelcome />
-  </main>
+
+
+
+<button class=" text-3xln"@click="clickMe">Click Me</button>
+
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
