@@ -1,10 +1,11 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const name = ref('John');
 const age = ref(354); // Assuming this is intentional
 const status = ref('active');
-const newTask = ref('');
+const tasks = ref(['Task 1', 'Task 2', 'Task 3'])
+const newTask = ref('Hellow');
 
 const toggleStatut = () => {
   if (status.value === 'active') {
@@ -14,14 +15,34 @@ const toggleStatut = () => {
   }
 };
 
-const addForm = (event) => {
-  console.log(`Task added: ${newTask.value}`);
-  newTask.value = ''; // Clear the input field after submission
+const addForm = () => {
+  if (newTask.value.trim() !== '') {
+    tasks.value.push(newTask.value); // Add new task to the array
+    console.log(`Task added: ${newTask.value}`);
+    newTask.value = ''; // Clear input field
+  } else {
+    console.log('Task cannot be empty');
+  }
 };
+
+const deleteTask = (index)=>{
+  tasks.value.splice(index, 1)
+}
 
 const clickMe = () => {
   console.log('Button clicked!');
 };
+
+
+onMounted(async() => {
+try {
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+  const data = await response.json()
+  tasks.value.push(data)
+} catch (error) {
+  throw new Error(error.message)
+}
+})
 </script>
 
 <template>
@@ -33,6 +54,20 @@ const clickMe = () => {
     <br>
     <button type="submit">Add Task</button>
   </form>
+
+  <h3>Tasks Below: </h3>
+  <ul>
+<li v-for="(task,index) in tasks" :key="task"> 
+  
+  <span>
+  {{ task }}
+</span>
+<button @click="deleteTask(index)">X</button>
+</li>
+
+
+
+  </ul>
 
   <button class="text-3xl" @click="clickMe">Click Me</button>
   <button class="text-3xl" @click="toggleStatut">
