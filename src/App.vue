@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import Header from './components/Header.vue';
 
 const name = ref('John');
 const age = ref(354); // Assuming this is intentional
@@ -48,8 +49,8 @@ try {
 </script>
 
 <template>
-  <h1 class="bg-red-400 p-5 inline-block mx-4 my-7 animate-ping delay-150 ease-in-out">{{ age}}</h1>
-
+  
+  <Header title='GoodBe' bg='bg-green-400'/>
   <form @submit.prevent="addForm">
     <label for="newTask">New Task</label>
     <input type="text" name="newTask" id="newTask" v-model="newTask" />
